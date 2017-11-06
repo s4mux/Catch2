@@ -1,6 +1,6 @@
 language: cpp
 sudo: false
-    
+
 matrix:
   include:
 
@@ -120,18 +120,13 @@ matrix:
     # 3b/ Linux C++14 Clang builds
     - os: linux
       compiler: clang
-      addons: &clang38cpp14
-          apt: 
+      addons:
+          apt:
               packages: ['clang-3.8', 'valgrind', 'libstdc++-6-dev']
               sources:
                   - ubuntu-toolchain-r-test
                   - llvm-toolchain-trusty
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Release' CPP14=1 VALGRIND=1
-
-    - os: linux
-      compiler: clang
-      addons: *clang38cpp14
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug' CPP14=1 VALGRIND=1
+      env: COMPILER='clang++-3.8' CPP14=1 VALGRIND=1
 
 #    # 4a/ Linux C++14 GCC builds
 #    - os: linux
@@ -191,9 +186,14 @@ install:
 before_script:
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND}
-  - cd Build
+  # Only run valgrind in debug build
+  - cmake -H. -BBuild-Debug -DCMAKE_BUILD_TYPE=Debug -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND}
+  - cmake -H. -BBuild-Release -DCMAKE_BUILD_TYPE=Release -Wdev -DUSE_CPP14=${CPP14}
 
 script:
+  - cd Build-Debug
+  - make -j 2
+  - ctest -V -j 2
+  - cd ../Build-Release
   - make -j 2
   - ctest -V -j 2
