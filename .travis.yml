@@ -4,7 +4,6 @@ sudo: false
 common_sources: &all_sources
   - ubuntu-toolchain-r-test
   - llvm-toolchain-trusty
-  - llvm-toolchain-trusty-3.7
   - llvm-toolchain-trusty-3.9
   - llvm-toolchain-trusty-4.0
   - llvm-toolchain-trusty-5.0
@@ -29,14 +28,14 @@ matrix:
           packages: ['valgrind', 'clang-3.6']
       env: COMPILER='clang++-3.6' VALGRIND=1
 
-
-    - os: linux
-      compiler: clang
-      addons:
-        apt:
-          sources: *all_sources
-          packages: ['valgrind', 'clang-3.7']
-      env: COMPILER='clang++-3.7' VALGRIND=1
+# Travis's containers do not seem to have Clang 3.7 in apt, no matter what sources I add. 
+#    - os: linux
+#      compiler: clang
+#      addons:
+#        apt:
+#          sources: *all_sources
+#          packages: ['valgrind', 'clang-3.7']
+#      env: COMPILER='clang++-3.7' VALGRIND=1
 
     - os: linux
       compiler: clang
