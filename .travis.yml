@@ -4,6 +4,7 @@ sudo: false
 common_sources: &all_sources
   - ubuntu-toolchain-r-test
   - llvm-toolchain-trusty
+  - llvm-toolchain-trusty-3.7
   - llvm-toolchain-trusty-3.9
   - llvm-toolchain-trusty-4.0
   - llvm-toolchain-trusty-5.0
@@ -27,6 +28,7 @@ matrix:
           sources: *all_sources
           packages: ['valgrind', 'clang-3.6']
       env: COMPILER='clang++-3.6' VALGRIND=1
+
 
     - os: linux
       compiler: clang
