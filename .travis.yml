@@ -1,6 +1,13 @@
 language: cpp
 sudo: false
 
+common_sources: &all_sources
+  - ubuntu-toolchain-r-test
+  - llvm-toolchain-trusty
+  - llvm-toolchain-trusty-3.9
+  - llvm-toolchain-trusty-4.0
+  - llvm-toolchain-trusty-5.0
+
 matrix:
   include:
 
@@ -9,7 +16,7 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: ['llvm-toolchain-precise-3.5', 'ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'clang-3.5']
       env: COMPILER='clang++-3.5' VALGRIND=1
 
@@ -17,7 +24,7 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: ['llvm-toolchain-precise-3.6', 'ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'clang-3.6']
       env: COMPILER='clang++-3.6' VALGRIND=1
 
@@ -25,7 +32,7 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: ['llvm-toolchain-precise-3.7', 'ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'clang-3.7']
       env: COMPILER='clang++-3.7' VALGRIND=1
 
@@ -33,7 +40,7 @@ matrix:
       compiler: clang
       addons:
         apt:
-          sources: ['llvm-toolchain-precise-3.8', 'ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'clang-3.8']
       env: COMPILER='clang++-3.8' VALGRIND=1
 
@@ -41,7 +48,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-3.9', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-3.9' VALGRIND=1
 
@@ -49,7 +56,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-4.0', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-4.0' VALGRIND=1
 
@@ -57,7 +64,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-5.0', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-5.0' VALGRIND=1
 
@@ -74,7 +81,7 @@ matrix:
       compiler: gcc
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'g++-4.9']
       env: COMPILER='g++-4.9' VALGRIND=1
 
@@ -82,7 +89,7 @@ matrix:
       compiler: gcc
       addons:
         apt:
-          sources: ['ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'g++-5']
       env: COMPILER='g++-5' VALGRIND=1
 
@@ -90,7 +97,7 @@ matrix:
       compiler: gcc
       addons: &gcc6
         apt:
-          sources: ['ubuntu-toolchain-r-test']
+          sources: *all_sources
           packages: ['valgrind', 'g++-6']
       env: COMPILER='g++-6' VALGRIND=1
 
@@ -110,7 +117,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-3.9', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-3.9' CPP14=1 VALGRIND=1
 
@@ -118,7 +125,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-4.0', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-4.0' CPP14=1 VALGRIND=1
 
@@ -126,7 +133,7 @@ matrix:
       compiler: clang
       addons:
           apt:
-              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              sources: *all_sources
               packages: ['clang-5.0', 'valgrind', 'libstdc++-6-dev']
       env: COMPILER='clang++-5.0' CPP14=1 VALGRIND=1
 
