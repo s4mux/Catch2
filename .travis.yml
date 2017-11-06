@@ -1,14 +1,5 @@
 language: cpp
 sudo: false
-
-
-addons:
-  apt:
-    packages:
-      - libstdc++-6-dev
-    sources: &sources
-      - ubuntu-toolchain-r-test
-
     
 matrix:
   include:
@@ -19,7 +10,7 @@ matrix:
 #      addons: &clang35
 #        apt:
 #          sources: ['llvm-toolchain-precise-3.5', 'ubuntu-toolchain-r-test']
-#          packages: ['clang-3.5']
+#          packages: ['valgrind', 'clang-3.5']
 #      env: COMPILER='clang++-3.5' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -33,7 +24,7 @@ matrix:
 #      addons: &clang36
 #        apt:
 #          sources: ['llvm-toolchain-precise-3.6', 'ubuntu-toolchain-r-test']
-#          packages: ['clang-3.6']
+#          packages: ['valgrind', 'clang-3.6']
 #      env: COMPILER='clang++-3.6' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -47,7 +38,7 @@ matrix:
 #      addons: &clang37
 #        apt:
 #          sources: ['llvm-toolchain-precise-3.7', 'ubuntu-toolchain-r-test']
-#          packages: ['clang-3.7']
+#          packages: ['valgrind', 'clang-3.7']
 #      env: COMPILER='clang++-3.7' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -61,7 +52,7 @@ matrix:
 #      addons: &clang38
 #        apt:
 #          sources: ['llvm-toolchain-precise-3.8', 'ubuntu-toolchain-r-test']
-#          packages: ['clang-3.8']
+#          packages: ['valgrind', 'clang-3.8']
 #      env: COMPILER='clang++-3.8' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -76,7 +67,7 @@ matrix:
 #      addons: &gcc48
 #        apt:
 #         sources: ['ubuntu-toolchain-r-test']
-#         packages: ['g++-4.8']
+#         packages: ['valgrind', 'g++-4.8']
 #      env: COMPILER='g++-4.8' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -90,7 +81,7 @@ matrix:
 #      addons: &gcc49
 #        apt:
 #          sources: ['ubuntu-toolchain-r-test']
-#          packages: ['g++-4.9']
+#          packages: ['valgrind', 'g++-4.9']
 #      env: COMPILER='g++-4.9' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -104,7 +95,7 @@ matrix:
 #      addons: &gcc5
 #        apt:
 #          sources: ['ubuntu-toolchain-r-test']
-#          packages: ['g++-5']
+#          packages: ['valgrind', 'g++-5']
 #      env: COMPILER='g++-5' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -118,7 +109,7 @@ matrix:
 #      addons: &gcc6
 #        apt:
 #          sources: ['ubuntu-toolchain-r-test']
-#          packages: ['g++-6']
+#          packages: ['valgrind', 'g++-6']
 #      env: COMPILER='g++-6' BUILD_TYPE='Release'
 #
 #    - os: linux
@@ -131,17 +122,17 @@ matrix:
       compiler: clang
       addons: &clang38cpp14
           apt: 
-              packages: ["clang-3.8"]
+              packages: ['clang-3.8', 'valgrind', 'libstdc++-6-dev']
               sources:
                   - ubuntu-toolchain-r-test
                   - llvm-toolchain-trusty
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Release' CPP14=1
+      env: COMPILER='clang++-3.8' BUILD_TYPE='Release' CPP14=1 VALGRIND=1
 
     - os: linux
       compiler: clang
       addons: *clang38cpp14
-      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug' CPP14=1
-#
+      env: COMPILER='clang++-3.8' BUILD_TYPE='Debug' CPP14=1 VALGRIND=1
+
 #    # 4a/ Linux C++14 GCC builds
 #    - os: linux
 #      compiler: gcc
@@ -200,7 +191,7 @@ install:
 before_script:
   - export CXX=${COMPILER}
   - cd ${TRAVIS_BUILD_DIR}
-  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev -DUSE_CPP14=${CPP14}
+  - cmake -H. -BBuild -DCMAKE_BUILD_TYPE=${BUILD_TYPE} -Wdev -DUSE_CPP14=${CPP14} -DUSE_VALGRIND=${VALGRIND}
   - cd Build
 
 script:
