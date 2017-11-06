@@ -37,6 +37,30 @@ matrix:
           packages: ['valgrind', 'clang-3.8']
       env: COMPILER='clang++-3.8' VALGRIND=1
 
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-3.9', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-3.9' VALGRIND=1
+
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-4.0', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-4.0' VALGRIND=1
+
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-5.0', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-5.0' VALGRIND=1
+
     # 2/ Linux GCC Builds
     - os: linux
       compiler: gcc
@@ -70,6 +94,7 @@ matrix:
           packages: ['valgrind', 'g++-6']
       env: COMPILER='g++-6' VALGRIND=1
 
+
     # 3b/ Linux C++14 Clang builds
     - os: linux
       compiler: clang
@@ -80,6 +105,31 @@ matrix:
                   - ubuntu-toolchain-r-test
                   - llvm-toolchain-trusty
       env: COMPILER='clang++-3.8' CPP14=1 VALGRIND=1
+
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-3.9', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-3.9' CPP14=1 VALGRIND=1
+
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-4.0', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-4.0' CPP14=1 VALGRIND=1
+
+    - os: linux
+      compiler: clang
+      addons:
+          apt:
+              sources: ['llvm-toolchain-trusty', 'ubuntu-toolchain-r-test']
+              packages: ['clang-5.0', 'valgrind', 'libstdc++-6-dev']
+      env: COMPILER='clang++-5.0' CPP14=1 VALGRIND=1
+
 
     # 4a/ Linux C++14 GCC builds
     - os: linux
