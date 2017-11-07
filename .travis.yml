@@ -170,19 +170,9 @@ matrix:
       env: COMPILER='clang++'
 
     - os: osx
-      osx_image: xcode8
-      compiler: clang
-      env: COMPILER='clang++' USE_CPP14=1
-
-    - os: osx
       osx_image: xcode9
       compiler: clang
       env: COMPILER='clang++'
-
-    - os: osx
-      osx_image: xcode9
-      compiler: clang
-      env: COMPILER='clang++' USE_CPP14=1
 
     - os: osx
       osx_image: xcode9.1
