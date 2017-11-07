@@ -102,6 +102,14 @@ matrix:
           packages: ['valgrind', 'g++-6']
       env: COMPILER='g++-6' VALGRIND=1
 
+    - os: linux
+      compiler: gcc
+      addons: &gcc7
+        apt:
+          sources: *all_sources
+          packages: ['valgrind', 'g++-7']
+      env: COMPILER='g++-7' VALGRIND=1
+
 
     # 3b/ Linux C++14 Clang builds
     - os: linux
@@ -144,6 +152,11 @@ matrix:
       compiler: gcc
       addons: *gcc6
       env: COMPILER='g++-6' CPP14=1 VALGRIND=1
+
+    - os: linux
+      compiler: gcc
+      addons: *gcc7
+      env: COMPILER='g++-7' CPP14=1 VALGRIND=1
 
     # 5/ OSX Clang Builds
     - os: osx
